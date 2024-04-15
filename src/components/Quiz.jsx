@@ -4,6 +4,8 @@ import QUESTIONS from '../questions.js';
 export default function Quiz() {
     const [userAnswers, setUserAnswers] = useState([])
     const activeQuestionIndex = userAnswers.length;
+    const shuffledAndswers = [...QUESTIONS[activeQuestionIndex].answers];
+    shuffledAndswers.sort(() => Math.random() - 0.5);
 
     function handleSelectAnswer(selectedAnswer) {
         setUserAnswers((prevUserAnswers) => {
@@ -20,7 +22,7 @@ export default function Quiz() {
             <div id="question">
                 <h2>{QUESTIONS[activeQuestionIndex].text}</h2>
                 <ul id="answers">
-                    {QUESTIONS[activeQuestionIndex].answers.map((answer, index) => (
+                    {shuffledAndswers.map((answer, index) => (
                         <li key={answer} className="answer">
                             <button onClick={() => handleSelectAnswer(answer)}>{answer}</button>
                         </li>
