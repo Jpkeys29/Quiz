@@ -16,5 +16,5 @@ export default function QuestionTimer({ timeout, onTimeout }) {
         }, 100);
     }, []);
 
-    return <progress />;
+    return <progress max={timeout} value={remainingTime}/>;
 }
