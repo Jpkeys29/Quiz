@@ -21,13 +21,8 @@ export default function Quiz() {
             } else {
                 setAnswerState('wrong');
             }
-
-            setTimeout(() => {
-                setAnswerState('');
-            },2000);
         }, 1000);
     }
-
 
     function handleNextQuestion(selectedAnswer) {
         setUserAnswers(current => current + 1);
@@ -45,11 +40,6 @@ export default function Quiz() {
     return (
         <div id="quiz">
             <div id="question">
-                {/* <QuestionTimer 
-                    timeout={10000}
-                    onTimeout={() => handleSelectAnswer(null)}
-                /> */}
-
                 <h2>{QUESTIONS[activeQuestionIndex].text}</h2>
                 <ul id="answers">
                     {shuffledAndswers.map((answer, index) => (
@@ -58,7 +48,7 @@ export default function Quiz() {
                         </li>
                     ))}
                 </ul>
-                <progress />
+                <progress value={activeQuestionIndex/userAnswers.length} max={4}/>
 
             </div>
         </div>
