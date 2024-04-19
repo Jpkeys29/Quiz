@@ -1,7 +1,7 @@
 import { useState } from "react";
 import QUESTIONS from '../questions.js';
 import quizCompleteImg from '../assets/quiz-complete.png';
-// import QuestionTimer from "./QuestionTimer.jsx";
+import Answers from "./Answers.jsx";
 
 export default function Quiz() {
     const [userAnswers, setUserAnswers] = useState([]);
@@ -15,13 +15,6 @@ export default function Quiz() {
         setUserAnswers((prevUserAnswers) => {
             return [...prevUserAnswers, selectedAnswer];
         });
-        setTimeout(() => {
-            if(selectedAnswer === QUESTIONS[activeQuestionIndex].answers[0]){
-                setAnswerState('correct');
-            } else {
-                setAnswerState('wrong');
-            }
-        }, 1000);
     }
 
     function handleNextQuestion(selectedAnswer) {
@@ -31,24 +24,24 @@ export default function Quiz() {
     if (quizIsComplete) {
         return <div id="summary">
             <img src={quizCompleteImg} alt='Trophy' />
-            <h2>You have completed the quiz!</h2>
+            <h2>Congratulations!</h2>
+            <h4>You have completed the quiz</h4>
         </div>
     }
-    const shuffledAndswers = [...QUESTIONS[activeQuestionIndex].answers];
-    shuffledAndswers.sort(() => Math.random() - 0.5);
 
     return (
         <div id="quiz">
             <div id="question">
                 <h2>{QUESTIONS[activeQuestionIndex].text}</h2>
-                <ul id="answers">
-                    {shuffledAndswers.map((answer, index) => (
-                        <li key={answer} className="answer">
-                            <button onClick={() => handleSelectAnswer(answer)}>{answer}</button>
-                        </li>
-                    ))}
-                </ul>
-                <progress value={activeQuestionIndex/userAnswers.length} max={4}/>
+                <Answers 
+                answers={QUESTIONS[activeQuestionIndex].answers} selectedAnswer={userAnswers[userAnswers.length - 1]}
+                answerState={answerState} />
+                <div>
+                    <progress value={activeQuestionIndex / userAnswers.length} max={userAnswers} 
+                    onSelect={handleSelectAnswer}
+                    />
+                </div>
+                {/* <button onClick={handleNextQuestion}>Next</button> */}
 
             </div>
         </div>
