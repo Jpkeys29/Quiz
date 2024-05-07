@@ -17,10 +17,7 @@ export default function Quiz() {
         }else{
             setFeedback('Incorrect')
         }
-        setAnswerState('answered');
-        setUserAnswers((prevUserAnswers) => {
-            return [...prevUserAnswers, selectedAnswer];
-        });
+        
     }
 
     function handleNextQuestion(selectedAnswer) {
@@ -34,16 +31,6 @@ export default function Quiz() {
             <h4>You have completed the quiz</h4>
         </div>
     }
-
-    // const correcta = answerState === QUESTIONS[activeQuestionIndex].answers[0] && true;
-    // console.log(correcta)
-
-    // if (correcta) {
-    //     setFeedBack('Great job!');
-    // }else {
-    //     setFeedBack('Awww, try again!');
-    // }
-
 
     return (
         <div id="quiz">
