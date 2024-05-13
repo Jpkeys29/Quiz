@@ -22,6 +22,7 @@ export default function Quiz() {
 
     function handleNextQuestion(selectedAnswer) {
         setUserAnswers(current => current + 1);
+        setFeedback('')
     }
 
     if (quizIsComplete) {
@@ -38,8 +39,8 @@ export default function Quiz() {
                 <h2>{QUESTIONS[activeQuestionIndex].text}</h2>
                 <Answers
                     answers={QUESTIONS[activeQuestionIndex].answers} selectedAnswer={userAnswers[userAnswers.length - 1]}
-                    answerState={answerState} onSelect={handleSelectAnswer}/>
-
+                    answerState={answerState} onSelect={handleSelectAnswer}
+                />
                 <div>
                     {/* <progress value={activeQuestionIndex / userAnswers.length} max={userAnswers}
                         onSelect={handleSelectAnswer} */}
